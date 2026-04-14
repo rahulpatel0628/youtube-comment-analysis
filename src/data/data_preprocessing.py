@@ -56,6 +56,14 @@ def clean_text_column(df: pd.DataFrame, stop_words, lemmatizer):
         df['comment'] = df['comment'].str.replace(r'\n', ' ', regex=True)
         df['comment'] = df['comment'].str.replace(r'\s+', ' ', regex=True).str.strip()
 
+        df['word_count'] = df['comment'].apply(lambda x: len(x.split()))
+
+        
+        df['char_count'] = df['comment'].apply(len)
+
+        
+        df['avg_word_length'] = df['char_count'] / (df['word_count'] + 1)  # +1 to avoid division by zero
+
         df['comment'] = df['comment'].apply(
             lambda x: ' '.join([word for word in x.split() if word.lower() not in stop_words])
         )
