@@ -5,4 +5,19 @@ data_ingestion:
 feature_engineering:
   max_features: 1000
   n_grams: [1, 3]
+
+model_building:
+  random_state: 42
+  n_estimators: 980
+  max_depth: 11
+  learning_rate: 0.040414882180645394
+  num_leaves: 79
+  min_child_samples: 23
+  subsample: 0.9653126342291365
+  colsample_bytree: 0.7616387832635141
+  reg_alpha: 1.8391205366209559e-06
+  reg_lambda: 0.0005919096233992369
+  objective: 'multiclass'
+  num_class: 3
+  class_weight: 'balanced'
   

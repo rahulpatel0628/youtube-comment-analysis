@@ -5,8 +5,8 @@ stages:
     deps:
     - path: params.yaml
       hash: md5
-      md5: 503bb6bb9386a04fe496fc782bc96012
-      size: 118
+      md5: 8c1be3e0538ac189452cae525a6736c0
+      size: 499
     - path: src/data/data_ingestion.py
       hash: md5
       md5: 3b9e0556c418e6dc815c3bafaea0023b
@@ -57,8 +57,8 @@ stages:
       size: 4675886
     - path: params.yaml
       hash: md5
-      md5: 503bb6bb9386a04fe496fc782bc96012
-      size: 118
+      md5: 8c1be3e0538ac189452cae525a6736c0
+      size: 499
     - path: src/features/feature_engineering.py
       hash: md5
       md5: aeb62c95ef1ee91f1c357838a709dffa
@@ -78,3 +78,39 @@ stages:
       hash: md5
       md5: 89bb7d3ded179580b042699db439202c
       size: 36995
+  model_building:
+    cmd: python src/model/model_building.py
+    deps:
+    - path: data/processed/train_tfidf.csv
+      hash: md5
+      md5: 00390ec6307efd8e4a9bf38604b9c562
+      size: 122414894
+    - path: params.yaml
+      hash: md5
+      md5: 8c1be3e0538ac189452cae525a6736c0
+      size: 499
+    - path: src/model/model_building.py
+      hash: md5
+      md5: 7c956b823981ea2fc8a8fbd4fe725f01
+      size: 2067
+    params:
+      params.yaml:
+        model_building:
+          random_state: 42
+          n_estimators: 980
+          max_depth: 11
+          learning_rate: 0.040414882180645394
+          num_leaves: 79
+          min_child_samples: 23
+          subsample: 0.9653126342291365
+          colsample_bytree: 0.7616387832635141
+          reg_alpha: 1.8391205366209559e-06
+          reg_lambda: 0.0005919096233992369
+          objective: multiclass
+          num_class: 3
+          class_weight: balanced
+    outs:
+    - path: models/lgb_model.pkl
+      hash: md5
+      md5: 59b5b5ec6509a0cd8eb752b6b4b6ae19
+      size: 12961276

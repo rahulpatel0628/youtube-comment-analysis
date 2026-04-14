@@ -33,3 +33,14 @@ stages:
     outs:
       - data/processed/train_tfidf.csv
       - models/tfidf_vectorizer.pkl
+  
+  model_building:
+    cmd: python src/model/model_building.py
+    deps:
+      - src/model/model_building.py
+      - data/processed/train_tfidf.csv
+      - params.yaml
+    params:
+      - model_building
+    outs:
+      - models/lgb_model.pkl
