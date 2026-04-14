@@ -44,3 +44,14 @@ stages:
       - model_building
     outs:
       - models/lgb_model.pkl
+  
+  evaluation:
+    cmd: python src/model/model_evaluation.py
+    deps:
+      - src/model/model_evaluation.py
+      - data/interim/preprocessed_test.csv
+      - models/lgb_model.pkl
+      - models/tfidf_vectorizer.pkl
+      - params.yaml
+    metrics:
+      - metrics.json

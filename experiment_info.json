@@ -1,0 +1,5 @@
+{
+    "run_id": "661df5f29aa74370b4a2fe20898a1bdc",
+    "model_path": "lgb_model",
+    "vectorizer_path": "tfidf_vectorizer"
+}

@@ -104,7 +104,7 @@ stages:
           min_child_samples: 23
           subsample: 0.9653126342291365
           colsample_bytree: 0.7616387832635141
-          reg_alpha: 1.8391205366209559e-06
+          reg_alpha: 1.8391205366209558e-06
           reg_lambda: 0.0005919096233992369
           objective: multiclass
           num_class: 3
@@ -114,3 +114,31 @@ stages:
       hash: md5
       md5: 59b5b5ec6509a0cd8eb752b6b4b6ae19
       size: 12961276
+  evaluation:
+    cmd: python src/model/model_evaluation.py
+    deps:
+    - path: data/interim/preprocessed_test.csv
+      hash: md5
+      md5: a2ed72da2525a2164b2251c3f319439c
+      size: 1135809
+    - path: models/lgb_model.pkl
+      hash: md5
+      md5: 59b5b5ec6509a0cd8eb752b6b4b6ae19
+      size: 12961276
+    - path: models/tfidf_vectorizer.pkl
+      hash: md5
+      md5: 89bb7d3ded179580b042699db439202c
+      size: 36995
+    - path: params.yaml
+      hash: md5
+      md5: 8c1be3e0538ac189452cae525a6736c0
+      size: 499
+    - path: src/model/model_evaluation.py
+      hash: md5
+      md5: 03e896c18a7ea73abf09fe96ad898fe7
+      size: 6324
+    outs:
+    - path: metrics.json
+      hash: md5
+      md5: baad2c390e804d1a3c82b211fbf6bafd
+      size: 32
