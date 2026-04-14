@@ -28,10 +28,9 @@ def preprocess_data(df: pd.DataFrame) -> pd.DataFrame:
 
         df.dropna(inplace=True)
         df.drop_duplicates(inplace=True)
-        df.rename(columns={'clean_comment': 'comment', 'category': 'category'}, inplace=True)
+        df.rename(columns={'clean_comment': 'comment'}, inplace=True)
         df = df[df['comment'].str.strip() != ""]
-        df['category'] = df['category'].map({'-1': 0, '0': 1, '1': 2})
-
+        df['category'] = df['category'].map({-1: 0, 0: 1, 1: 2})
         logging.info("Preprocessing completed")
         return df
     except Exception as e:
@@ -60,10 +59,9 @@ def split_data(df: pd.DataFrame, test_size: float, random_state: int):
             test_size=test_size,
             random_state=random_state
         )
-
-        train_df = pd.DataFrame({'comment': x_train, 'category': y_train})
-        test_df = pd.DataFrame({'comment': x_test, 'category': y_test})
-
+       
+        train_df = pd.concat([x_train, y_train], axis=1)
+        test_df = pd.concat([x_test, y_test], axis=1)
         logging.info("Data split completed")
         return train_df, test_df
     except Exception as e:
@@ -89,10 +87,12 @@ def save_data(train_df: pd.DataFrame, test_df: pd.DataFrame, output_path: Path):
 def main():
     try:
         data_url = "https://raw.githubusercontent.com/Himanshu-1703/reddit-sentiment-analysis/refs/heads/main/data/reddit.csv"
+        
         params_path = "params.yaml"
         output_path = Path(__file__).parent.parent.parent / "data" / "raw"
 
         df = load_data(data_url)
+    
         df = preprocess_data(df)
 
         params = load_params(params_path)
